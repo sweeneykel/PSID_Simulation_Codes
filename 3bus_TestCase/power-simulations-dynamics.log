@@ -1,41 +1,41 @@
-┌ Info: 2026-06-20T16:59:09.011 [24024:1]: Pre-Initializing Simulation States
-└ @ PowerSimulationsDynamics C:\Users\ajeye\.julia\dev\PowerSimulationsDynamics\src\base\simulation.jl:265
-┌ Info: 2026-06-20T16:59:09.011 [24024:1]: The TrustRegionACPowerFlow solver converged after 1 iterations.
-└ @ PowerFlows C:\Users\ajeye\.julia\packages\PowerFlows\Ilrf1\src\powerflow_method.jl:314
-┌ Info: 2026-06-20T16:59:09.011 [24024:1]: PowerFlow solve converged, the results have been stored in the system
-└ @ PowerFlows C:\Users\ajeye\.julia\packages\PowerFlows\Ilrf1\src\solve_ac_powerflow.jl:62
-┌ Info: 2026-06-20T16:59:09.013 [24024:1]: Residual from initial guess: max = 6.133726859758326e-9 at 51, total = 6.138423393856898e-9
-└ @ PowerSimulationsDynamics C:\Users\ajeye\.julia\dev\PowerSimulationsDynamics\src\base\nlsolve_wrapper.jl:115
-┌ Info: 2026-06-20T16:59:09.015 [24024:1]: Initialization non-linear solve succeeded with a tolerance of 1.0e-9 using solver trust_region. Saving solution.
-└ @ PowerSimulationsDynamics C:\Users\ajeye\.julia\dev\PowerSimulationsDynamics\src\base\nlsolve_wrapper.jl:82
-┌ Info: 2026-06-20T16:59:09.015 [24024:1]: Attaching Perturbations
-└ @ PowerSimulationsDynamics C:\Users\ajeye\.julia\dev\PowerSimulationsDynamics\src\base\simulation.jl:299
-┌ Info: 2026-06-20T16:59:09.015 [24024:1]: Simulations status = BUILT
-└ @ PowerSimulationsDynamics C:\Users\ajeye\.julia\dev\PowerSimulationsDynamics\src\base\simulation.jl:462
-┌ Info: 2026-06-20T16:59:09.015 [24024:1]: 
+┌ Info: 2026-06-22T10:49:50.551 [48062:1]: Pre-Initializing Simulation States
+└ @ PowerSimulationsDynamics /home/kelsey-sweeney/.julia/packages/PowerSimulationsDynamics/b6f1m/src/base/simulation.jl:265
+┌ Info: 2026-06-22T10:49:50.552 [48062:1]: The TrustRegionACPowerFlow solver converged after 1 iterations.
+└ @ PowerFlows /home/kelsey-sweeney/.julia/packages/PowerFlows/Ilrf1/src/powerflow_method.jl:314
+┌ Info: 2026-06-22T10:49:50.552 [48062:1]: PowerFlow solve converged, the results have been stored in the system
+└ @ PowerFlows /home/kelsey-sweeney/.julia/packages/PowerFlows/Ilrf1/src/solve_ac_powerflow.jl:62
+┌ Info: 2026-06-22T10:49:50.553 [48062:1]: Residual from initial guess: max = 6.133726859758326e-9 at 51, total = 6.1382607323306145e-9
+└ @ PowerSimulationsDynamics /home/kelsey-sweeney/.julia/packages/PowerSimulationsDynamics/b6f1m/src/base/nlsolve_wrapper.jl:115
+┌ Info: 2026-06-22T10:49:50.555 [48062:1]: Initialization non-linear solve succeeded with a tolerance of 1.0e-9 using solver trust_region. Saving solution.
+└ @ PowerSimulationsDynamics /home/kelsey-sweeney/.julia/packages/PowerSimulationsDynamics/b6f1m/src/base/nlsolve_wrapper.jl:82
+┌ Info: 2026-06-22T10:49:50.555 [48062:1]: Attaching Perturbations
+└ @ PowerSimulationsDynamics /home/kelsey-sweeney/.julia/packages/PowerSimulationsDynamics/b6f1m/src/base/simulation.jl:299
+┌ Info: 2026-06-22T10:49:50.555 [48062:1]: Simulations status = BUILT
+└ @ PowerSimulationsDynamics /home/kelsey-sweeney/.julia/packages/PowerSimulationsDynamics/b6f1m/src/base/simulation.jl:462
+┌ Info: 2026-06-22T10:49:50.555 [48062:1]: 
 │ ──────────────────────────────────────────────────────────────────────────────────────
 │                                                            Time          Allocations  
 │                                                      ───────────────   ───────────────
-│                    Total measured:                       5.66ms            1.81MiB    
+│                    Total measured:                       4.23ms            1.78MiB    
 │ 
 │ Section                                      ncalls     time    %tot     alloc    %tot
 │ ──────────────────────────────────────────────────────────────────────────────────────
-│ Build Simulation                                  1   5.65ms  100.0%   1.81MiB  100.0%
-│   Build Simulation Inputs                         1   1.00ms   17.7%   83.2KiB    4.5%
-│     Wrap Branches                                 1   78.0μs    1.4%   5.28KiB    0.3%
-│     Wrap Dynamic Injectors                        1    456μs    8.1%   50.6KiB    2.7%
-│     Calculate MM, DAE_vector, Total Shunts        1   48.8μs    0.9%   4.02KiB    0.2%
-│     Wrap Static Injectors                         1   91.7μs    1.6%   4.64KiB    0.3%
-│   Pre-initialization                              1   1.38ms   24.4%    287KiB   15.5%
-│     Power Flow solution                           1    564μs   10.0%   76.7KiB    4.1%
-│     Initialize Static Injectors                   1   1.10μs    0.0%     64.0B    0.0%
-│     Initialize Dynamic Injectors                  1    629μs   11.1%    195KiB   10.5%
-│     Initialize Dynamic Branches                   1   15.6μs    0.3%   1.38KiB    0.1%
-│   Calculate Jacobian                              1    615μs   10.9%    692KiB   37.3%
+│ Build Simulation                                  1   4.22ms  100.0%   1.78MiB  100.0%
+│   Build Simulation Inputs                         1    682μs   16.2%   83.2KiB    4.6%
+│     Wrap Branches                                 1   45.1μs    1.1%   5.28KiB    0.3%
+│     Wrap Dynamic Injectors                        1    266μs    6.3%   50.6KiB    2.8%
+│     Calculate MM, DAE_vector, Total Shunts        1   35.6μs    0.8%   4.02KiB    0.2%
+│     Wrap Static Injectors                         1   72.4μs    1.7%   4.64KiB    0.3%
+│   Pre-initialization                              1    936μs   22.2%    282KiB   15.5%
+│     Power Flow solution                           1    387μs    9.2%   73.4KiB    4.0%
+│     Initialize Static Injectors                   1   2.38μs    0.1%     64.0B    0.0%
+│     Initialize Dynamic Injectors                  1    392μs    9.3%    195KiB   10.7%
+│     Initialize Dynamic Branches                   1   13.1μs    0.3%   1.38KiB    0.1%
+│   Calculate Jacobian                              1    443μs   10.5%    680KiB   37.3%
 │   Make Model Function                             1   9.50μs    0.2%   1.34KiB    0.1%
-│   Initial Condition NLsolve refinement            1   2.34ms   41.4%    753KiB   40.6%
-│   Build Perturbations                             1   82.5μs    1.5%   13.6KiB    0.7%
-│   Make DiffEq Problem                             1    199μs    3.5%   9.69KiB    0.5%
+│   Initial Condition NLsolve refinement            1   1.90ms   45.0%    743KiB   40.8%
+│   Build Perturbations                             1   79.5μs    1.9%   11.8KiB    0.6%
+│   Make DiffEq Problem                             1    109μs    2.6%   9.69KiB    0.5%
 │ ──────────────────────────────────────────────────────────────────────────────────────
 │ 
-└ @ PowerSimulationsDynamics C:\Users\ajeye\.julia\dev\PowerSimulationsDynamics\src\base\simulation.jl:487
+└ @ PowerSimulationsDynamics /home/kelsey-sweeney/.julia/packages/PowerSimulationsDynamics/b6f1m/src/base/simulation.jl:487
