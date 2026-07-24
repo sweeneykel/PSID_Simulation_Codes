@@ -1356,7 +1356,7 @@ function plot_summary(results, sys, steps, plotdir)
     for bus in GFL_BUSES
         out = gfl_power_loop(results, sys, bus); out === nothing && continue
         t, Δp_oc = maybe_resample(out.t, out.Δp_oc, ev)
-        plot!(p6, t, Δp_oc; ylims = (-0.008, 0.015), lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (Kω=%.2f)", bus_label(bus), out.Kω))
+        plot!(p6, t, Δp_oc; ylims = (-0.012, 0.015), lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (Kω=%.2f)", bus_label(bus), out.Kω))
     end
     hline!(p6, [0.0]; lw = 0.8, ls = :dot, c = :gray, label = "")
     _mark_events!(p6, ev)
