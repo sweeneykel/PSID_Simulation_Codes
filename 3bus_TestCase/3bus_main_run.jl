@@ -1147,7 +1147,8 @@ end
 function plot_ssa_eigs(mode_df::DataFrame, fig_path::String)
     p = plot(xlabel = "Real(λ)", ylabel = "Imag(λ)", title = "SSA Eigenvalues",
              legend = :best, grid = false, framestyle = :box, dpi = 150, size = (950, 650),
-             titlefont = font(12, :bold), guidefont = font(13, :bold), tickfont = font(11, :bold))
+             titlefont = font(12, :bold), guidefont = font(13, :bold), tickfont = font(11, :bold),
+             xlims = (-4000, 4000), ylims = (-4000, 4000))
     sdf = mode_df[mode_df.unstable .== false, :]
     udf = mode_df[mode_df.unstable .== true, :]
     nrow(sdf) > 0 && scatter!(p, sdf.real_part, sdf.imag_part; ms = 4, label = "Stable / near-axis")
@@ -1278,7 +1279,7 @@ function plot_voltage_magnitude_panel(results, sys, steps, plotdir)
     for bus in sort(unique([SG_BUSES; GFM_BUSES; GFL_BUSES]))
         out = voltage_magnitude_pu(results, sys, bus); out === nothing && continue
         t, V = maybe_resample(out[1], out[2], ev)
-        plot!(p, t, V; lw = 3.0, color = bus_plot_color(bus), label = bus_label(bus))
+        plot!(p, t, V;  lw = 3.0, color = bus_plot_color(bus), label = bus_label(bus))
     end
     _mark_events!(p, ev)
     savefig(p, joinpath(plotdir, "3bus_voltage_magnitude_pu.png"))
@@ -1292,7 +1293,7 @@ function plot_voltage_deviation_panel(results, sys, steps, plotdir)
     for bus in sort(unique([SG_BUSES; GFM_BUSES; GFL_BUSES]))
         out = voltage_magnitude_pu(results, sys, bus); out === nothing && continue
         t, V = maybe_resample(out[1], out[2], ev); V0 = first_finite(V)
-        plot!(p, t, V .- V0; lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (V₀=%.4f)", bus_label(bus), V0))
+        plot!(p, t, V .- V0; ylims = (-0.06, 0.00), lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (V₀=%.4f)", bus_label(bus), V0))
     end
     hline!(p, [0.0]; lw = 0.8, ls = :dot, c = :gray, label = "")
     _mark_events!(p, ev)
@@ -1310,7 +1311,7 @@ function plot_summary(results, sys, steps, plotdir)
     for bus in all_buses
         s = frequency_dev_hz(results, sys, bus); s === nothing && continue
         t, df = maybe_resample(s[1], s[2], ev)
-        plot!(p1, t, df; lw = 3.0, color = bus_plot_color(bus), label = bus_label(bus))
+        plot!(p1, t, df; ylims = (-0.06, 0.00), lw = 3.0, color = bus_plot_color(bus), label = bus_label(bus))
     end
     _mark_events!(p1, ev)
 
@@ -1318,7 +1319,7 @@ function plot_summary(results, sys, steps, plotdir)
     for bus in all_buses
         s = rotor_angle_dev_rad(results, sys, bus); s === nothing && continue
         t, dδ = maybe_resample(s[1], s[2], ev)
-        plot!(p2, t, dδ; lw = 3.0, color = bus_plot_color(bus), label = bus_label(bus))
+        plot!(p2, t, dδ; ylims = (-0.07, 0.00), lw = 3.0, color = bus_plot_color(bus), label = bus_label(bus))
     end
     _mark_events!(p2, ev)
 
@@ -1326,7 +1327,7 @@ function plot_summary(results, sys, steps, plotdir)
     for bus in all_buses
         out = terminal_pq_dev(results, sys, bus); out === nothing && continue
         t, ΔP = maybe_resample(out.t, out.ΔP, ev)
-        plot!(p3, t, ΔP; lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (P₀=%.4f)", bus_label(bus), out.P0))
+        plot!(p3, t, ΔP; ylims = (-0.2, 0.20), lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (P₀=%.4f)", bus_label(bus), out.P0))
     end
     hline!(p3, [0.0]; lw = 0.8, ls = :dot, c = :gray, label = "")
     _mark_events!(p3, ev)
@@ -1335,7 +1336,7 @@ function plot_summary(results, sys, steps, plotdir)
     for bus in all_buses
         out = terminal_pq_dev(results, sys, bus); out === nothing && continue
         t, ΔQ = maybe_resample(out.t, out.ΔQ, ev)
-        plot!(p4, t, ΔQ; lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (Q₀=%.4f)", bus_label(bus), out.Q0))
+        plot!(p4, t, ΔQ; ylims = (-0.06, 0.08), lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (Q₀=%.4f)", bus_label(bus), out.Q0))
     end
     hline!(p4, [0.0]; lw = 0.8, ls = :dot, c = :gray, label = "")
     _mark_events!(p4, ev)
@@ -1345,7 +1346,7 @@ function plot_summary(results, sys, steps, plotdir)
         out = mech_power_dev(results, sys, bus); out === nothing && continue
         t, ΔPm, Pm0, mbase, _, _ = out
         t, ΔPm = maybe_resample(t, ΔPm, ev)
-        plot!(p5, t, ΔPm; lw = 3.0, color = bus_plot_color(bus),
+        plot!(p5, t, ΔPm; ylims = (0.00, 0.06), lw = 3.0, color = bus_plot_color(bus),
               label = @sprintf("%s (mBase=%.0f, Pm₀=%.3f)", bus_label(bus), mbase, Pm0))
     end
     hline!(p5, [0.0]; lw = 0.8, ls = :dot, c = :gray, label = "")
@@ -1355,7 +1356,7 @@ function plot_summary(results, sys, steps, plotdir)
     for bus in GFL_BUSES
         out = gfl_power_loop(results, sys, bus); out === nothing && continue
         t, Δp_oc = maybe_resample(out.t, out.Δp_oc, ev)
-        plot!(p6, t, Δp_oc; lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (Kω=%.2f)", bus_label(bus), out.Kω))
+        plot!(p6, t, Δp_oc; ylims = (-0.008, 0.015), lw = 3.0, color = bus_plot_color(bus), label = @sprintf("%s (Kω=%.2f)", bus_label(bus), out.Kω))
     end
     hline!(p6, [0.0]; lw = 0.8, ls = :dot, c = :gray, label = "")
     _mark_events!(p6, ev)
